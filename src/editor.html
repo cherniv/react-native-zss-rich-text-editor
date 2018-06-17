@@ -50,6 +50,16 @@
 				return s.replace(/^\s+/g, '');
 			}
 
+			function isAndroid() {
+				var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+			    if (/android/i.test(userAgent)) {
+			        return true;
+			    }
+
+			    return false;
+			}
+
 			function style_html(html_source, options) {
 				//Wrapper function to invoke all the necessary constructors and deal with the output.
 
@@ -1030,7 +1040,7 @@
 				//sel.collapseToStart();
 				var range = sel.getRangeAt(0);
 				var span = document.createElement('span');// something happening here preventing selection of elements
-				range.collapse(false); // causes Android >= 24 to stop working
+				if (!isAndroid()) range.collapse(false); // causes Android >= 24 to stop working
 				range.insertNode(span);
 				var topPosition = span.offsetTop;
 				span.parentNode.removeChild(span);
