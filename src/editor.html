@@ -1264,7 +1264,9 @@
 
 			zss_editor.insertLink = function(url, title) {
 
-				zss_editor.restorerange();
+				if (zss_editor.currentSelection) {
+					zss_editor.restorerange();
+				}
 				var sel = document.getSelection();
 				sel.deleteFromDocument();
 				document.execCommand('insertHTML',false,'<a href="'+encodeHtmlEntities(url)+'">'+encodeHtmlEntities(title)+'</a>');
@@ -1274,7 +1276,9 @@
 
 			zss_editor.updateLink = function(url, title) {
 
-				zss_editor.restorerange();
+				if (zss_editor.currentSelection) {
+					zss_editor.restorerange();
+				}
 
 				if (zss_editor.currentEditingLink) {
 					var c = zss_editor.currentEditingLink;
@@ -1359,7 +1363,9 @@
 			}
 
 			zss_editor.insertImage = function(attributes) {
-				zss_editor.restorerange();
+				if (zss_editor.currentSelection) {
+					zss_editor.restorerange();
+				}
 				var imageContainer = $('<div><img></div>');
 				imageContainer.find('img').attr(attributes);
 				zss_editor.insertHTML('<br>' + imageContainer.html() + '<br>');
