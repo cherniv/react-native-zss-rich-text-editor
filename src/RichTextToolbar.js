@@ -105,7 +105,7 @@ export default class RichTextToolbar extends Component {
       <TouchableOpacity
           key={action}
           style={[
-            {height: 50, width: 50, justifyContent: 'center'},
+            {height: 50, width: 50, justifyContent: 'center', alignItems: 'center',},
             selected ? this._getButtonSelectedStyle() : this._getButtonUnselectedStyle()
           ]}
           onPress={() => this._onPress(action)}
@@ -177,6 +177,12 @@ export default class RichTextToolbar extends Component {
         this.state.editor.prepareInsert();
         if(this.props.onPressAddImage) {
           this.props.onPressAddImage();
+        }
+        break;
+      case 'mention':
+        this.state.editor.prepareInsert();
+        if(this.props.onPressAddMention) {
+          this.props.onPressAddMention();
         }
         break;
         break;
