@@ -199,6 +199,10 @@ export default class RichTextEditor extends Component {
           });
           break;
         }
+        case messages.CONTENT_BLUR: {
+          this.contentBlurHandler && this.contentBlurHandler();
+          break;
+        }
       }
     } catch(e) {
       //alert('NON JSON MESSAGE');
@@ -620,6 +624,10 @@ export default class RichTextEditor extends Component {
 
   addSelectedTextChangeListener(listener) {
     this._selectedTextChangeListeners.push(listener);
+  }
+
+  setContentBlurHandler(callbackHandler) {
+    this.contentBlurHandler = callbackHandler;
   }
 }
 

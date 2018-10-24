@@ -929,6 +929,8 @@
 
 				//zss_editor.focusTitle();
 				//zss_editor.focusContent();
+				zss_editor.setContentFocusHandler();
+				zss_editor.setContentBlurHandler();
 
 				setTimeout(function() {
 					WebViewBridge.send(JSON.stringify({type: 'ZSS_INITIALIZED'}))
@@ -972,6 +974,17 @@
 
 			function replaceNewlinesWithLineBreaks(html) {
 				return html.replace(/\r?\n/g, '<br>');
+			}
+
+			function addBlurEvent(editorId, callbackHandler) {
+				var editor = $('#' + editorId);
+				editor.on('blur', callbackHandler);
+			}
+
+			zss_editor.setContentBlurHandler = function() {
+				addBlurEvent('zss_editor_content', function() {
+					WebViewBridge.send(JSON.stringify({type: 'CONTENT_BLUR'}))
+				});
 			}
 
 			zss_editor.updateOffset = function() {
